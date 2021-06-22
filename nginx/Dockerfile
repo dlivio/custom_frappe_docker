@@ -1,5 +1,8 @@
 ARG FRAPPE_BRANCH=develop
-FROM node:12-buster
+FROM node:14-buster-slim
+
+RUN apt-get update
+RUN apt-get -y install git
 
 COPY install_frappe.sh /install_frappe
 COPY install_erpnext.sh /install_erpnext
@@ -11,11 +14,11 @@ RUN /install_frappe && \
   # Install erpnext
   /install_erpnext && \
   # Install required apps with following command
-  # /install_app <app_name> <repo> <app_branch>
-  /install_app posawesome https://github.com/yrestom/POS-Awesome master && \
-  /install_app frappe_s3_attachment https://github.com/zerodha/frappe-attachments-s3 master && \
-  /install_app metabase_integration https://github.com/pipech/frappe-metabase master && \
-  /install_app bookings https://github.com/franknyarkoh/bookings master && \
+  /install_app ipcameras https://github.com/dlivio/ipcameras master && \
+  # /install_app posawesome https://github.com/yrestom/POS-Awesome master && \
+  # /install_app frappe_s3_attachment https://github.com/zerodha/frappe-attachments-s3 master && \
+  # /install_app metabase_integration https://github.com/pipech/frappe-metabase master && \
+  # /install_app bookings https://github.com/franknyarkoh/bookings master && \
   /install_app bench_manager https://github.com/frappe/bench_manager develop && \
   # Cleanup for production
   /prepare_production
