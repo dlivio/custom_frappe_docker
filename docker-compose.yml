@@ -36,6 +36,9 @@ services:
       - "traefik.http.routers.custom-erpnext-nginx.rule=Host(${SITES})"
       - "${ENTRYPOINT_LABEL}"
       - "traefik.http.services.custom-erpnext-nginx.loadbalancer.server.port=80"
+      - "traefik.http.routers.erpnext-nginx.rule=HostRegexp(`{catchall:.*}`)"
+      - "traefik.http.middlewares.erpnext-nginx.headers.customrequestheaders.Host=erpnext-nginx"
+      - "traefik.http.routers.erpnext-nginx.middlewares=erpnext-nginx"
     volumes:
       - sites-vol:/var/www/html/sites:rw
       - assets-vol:/assets:rw
@@ -138,6 +141,7 @@ services:
     restart: "no"
     command: new
     depends_on:
+      - mariadb
       - erpnext-python
     environment:
       - SITE_NAME=${SITE_NAME}
