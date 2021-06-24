@@ -1,8 +1,7 @@
+FROM node:14-buster
 ARG FRAPPE_BRANCH=develop
-FROM node:14-buster-slim
 
-RUN apt-get update
-RUN apt-get -y install git
+RUN apt-get update && apt-get install -y git
 
 COPY install_frappe.sh /install_frappe
 COPY install_erpnext.sh /install_erpnext
@@ -10,7 +9,7 @@ COPY install_app.sh /install_app
 COPY prepare_production.sh /prepare_production
 
 # Install frappe
-RUN /install_frappe && \
+RUN /install_frappe ${FRAPPE_BRANCH} && \
   # Install erpnext
   /install_erpnext && \
   # Install required apps with following command
