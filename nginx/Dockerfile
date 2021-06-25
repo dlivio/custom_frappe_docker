@@ -1,3 +1,4 @@
+ARG FRAPPE_BRANCH=develop
 FROM node:14-buster
 ARG FRAPPE_BRANCH=develop
 
