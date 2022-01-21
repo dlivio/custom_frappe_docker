@@ -14,7 +14,7 @@ RUN /install_frappe ${FRAPPE_BRANCH} && \
   # Install erpnext
   /install_erpnext && \
   # Install required apps with following command
-  /install_app ipcameras https://github.com/dlivio/ipcameras master && \
+  # /install_app ipcameras https://github.com/dlivio/ipcameras master && \
   /install_app project_extension https://github.com/dlivio/project_extension.git master && \
   # /install_app posawesome https://github.com/yrestom/POS-Awesome master && \
   # /install_app frappe_s3_attachment https://github.com/zerodha/frappe-attachments-s3 master && \
